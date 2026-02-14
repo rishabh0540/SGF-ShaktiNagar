@@ -833,7 +833,7 @@
                 }
             ];
 
-            const categories = useMemo(() => [...new Set(menuItems.map(item => item.category))], [menuItems]);
+            const categories = useMemo(() => ["All", ...new Set(menuItems.map(item => item.category))], [menuItems]);
             const subCategories = useMemo(() => {
                 const subSet = new Set(
                     menuItems
@@ -845,7 +845,7 @@
 
             const filteredMenu = useMemo(() => {
                 return menuItems.filter(item => {
-                    const matchesCat = item.category === activeCategory;
+                    const matchesCat = activeCategory === 'All' || item.category === activeCategory;
                     const matchesSub = activeSubCategory === 'All' || item.subCategory === activeSubCategory;
                     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
                     return matchesCat && matchesSub && matchesSearch;
